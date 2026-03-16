@@ -7,7 +7,7 @@
    <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
+<style>h
 /* ═══════════════════════════════════════
    RESET & BASE
 ═══════════════════════════════════════ */
@@ -1603,26 +1603,29 @@ function chkDate(src) {
   const yEl = document.getElementById('inp-year');
   const mEl = document.getElementById('inp-month');
   const dEl = document.getElementById('inp-day');
-  const y = yEl.value, m = mEl.value, d = dEl.value;
+  const y = yEl.value;
+  const m = mEl.value;
+  const d = dEl.value;
 
-  // 월 범위 강제
+  // 범위 초과만 강제 조정 (최솟값 강제 없음)
   if (m !== '' && +m > 12) mEl.value = '12';
-  if (m !== '' && +m < 1 && m.length > 0) mEl.value = '1';
-  // 일 범위 강제
   if (d !== '' && +d > 31) dEl.value = '31';
-  if (d !== '' && +d < 1 && d.length > 0) dEl.value = '1';
 
-  // 연도 4자리 입력 → 월 자동 포커스
+  // 연도 4자리 → 월 자동 포커스
   if (src === 'year' && y.length === 4) mEl.focus();
-  // 월 2자리 or 범위 내 2번째 자리 → 일 자동 포커스
-  if (src === 'month' && (m.length === 2 || (+m >= 2 && m.length === 1))) dEl.focus();
+
+  // 월 입력 완료 → 일 자동 포커스
+  // 2자리 입력됐거나, 2 이상 숫자 1자리면 넘김 (13이상은 이미 위에서 막힘)
+  if (src === 'month') {
+    if (m.length === 2) dEl.focus();
+    else if (m.length === 1 && +m >= 2) dEl.focus();
+  }
 
   const ok = y.length === 4 && +y >= 1920 && +y <= 2010
            && m !== '' && +m >= 1 && +m <= 12
            && d !== '' && +d >= 1 && +d <= 31;
   document.getElementById('n2').disabled = !ok;
 }
-
 
 /* ════════════════════════════════
    각 스텝 GO
