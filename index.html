@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>오늘의별 — 종합운세 미리보기</title>
-   <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -350,7 +350,7 @@ body::before {
 }
 .step-question {
   font-family: 'Noto Serif KR', serif;
-  font-size: 26px;
+  font-size: clamp(22px, 6vw, 30px);
   font-weight: 600;
   line-height: 1.4;
   color: #f5f0e0;
@@ -726,7 +726,7 @@ body::before {
   margin-bottom: 14px;
 }
 .r-section-body {
-  font-size: 14.5px;
+  font-size: 13.5px;
   line-height: 2;
   color: rgba(240,235,224,0.6);
   white-space: pre-wrap;
@@ -744,10 +744,10 @@ body::before {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 100px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(4,4,12,0.1) 100%);
+  background: linear-gradient(to bottom, transparent, #04040c);
 }
 .blur-inner {
-  filter: blur(6px);
+  filter: blur(4px);
   user-select: none;
   pointer-events: none;
 }
@@ -921,6 +921,63 @@ body::before {
   letter-spacing: 0.02em; margin-bottom: 10px;
 }
 .fb-notice { font-size: 11px; color: rgba(240,235,224,0.55); line-height: 1.7; }
+/* ═══════════════════════════════════════
+   가격 카운트다운 배너
+═══════════════════════════════════════ */
+.price-countdown {
+  background: linear-gradient(135deg, rgba(180,30,30,0.18), rgba(120,20,20,0.25));
+  border-top: 1px solid rgba(255,80,80,0.3);
+  border-bottom: 1px solid rgba(255,80,80,0.3);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: 10px;
+  animation: urgencyPulse 2s ease-in-out infinite;
+}
+@keyframes urgencyPulse {
+  0%, 100% { background: linear-gradient(135deg, rgba(180,30,30,0.18), rgba(120,20,20,0.25)); }
+  50%       { background: linear-gradient(135deg, rgba(200,40,40,0.28), rgba(140,20,20,0.35)); }
+}
+.pc-left { font-size: 11px; color: rgba(240,200,200,0.8); line-height: 1.7; }
+.pc-left strong {
+  color: #ff6b6b;
+  font-weight: 700;
+  display: block;
+  font-size: 12.5px;
+  margin-bottom: 2px;
+  letter-spacing: 0.02em;
+}
+.pc-left .pc-arrow { color: rgba(240,200,200,0.6); font-size: 10.5px; }
+.pc-left .pc-arrow span { color: #ffd700; font-weight: 600; }
+.pc-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.pc-timer-label {
+  font-size: 9px;
+  color: rgba(255,150,150,0.7);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pc-timer {
+  font-family: 'Noto Sans KR', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff4444;
+  letter-spacing: 3px;
+  flex-shrink: 0;
+  text-shadow: 0 0 12px rgba(255,68,68,0.6), 0 0 24px rgba(255,68,68,0.3);
+  animation: timerFlicker 1s ease-in-out infinite;
+}
+@keyframes timerFlicker {
+  0%, 90%, 100% { opacity: 1; }
+  95% { opacity: 0.85; }
+}
 
 /* 스크롤바 숨기기 */
 #s5::-webkit-scrollbar { display: none; }
@@ -1214,7 +1271,7 @@ body::before {
       oninput="chkTime()"
       onkeydown="if(event.key==='Enter'&&!document.getElementById('n3').disabled)go3()">
     <p class="step-hint">0시~23시 기준으로 적어줘요 (예: 02:15, 23:40)<br>생시를 모르면 아래 버튼을 눌러줘요</p>
-    <button class="step-next" id="n3" onclick="go3()" disabled>별자리 분석 시작 →</button>
+    <button class="step-next" id="n3" onclick="go3()">별자리 분석 시작 →</button>
     <button class="skip-link" onclick="skipTime()">생시를 잘 모르겠어요</button>
   </div>
 </div>
@@ -1271,7 +1328,13 @@ body::before {
         <div class="ric-sign-name" id="r-sign-name">물고기자리</div>
       </div>
     </div>
-
+    <div class="mini-chart">
+      <div class="mc-item"><div class="mc-label">태양</div><div class="mc-val" id="mc-sun">—</div></div>
+      <div class="mc-item"><div class="mc-label">달</div><div class="mc-val" id="mc-moon">—</div></div>
+      <div class="mc-item"><div class="mc-label">수성</div><div class="mc-val" id="mc-mercury">—</div></div>
+      <div class="mc-item"><div class="mc-label">금성</div><div class="mc-val" id="mc-venus">—</div></div>
+      <div class="mc-item"><div class="mc-label">화성</div><div class="mc-val" id="mc-mars">—</div></div>
+    </div>
   </div>
 
   <div class="result-body">
@@ -1284,7 +1347,7 @@ body::before {
 
     <!-- 미리보기 섹션 2 — 대운은 언제 오는가 -->
     <div class="preview-section">
-      <div class="r-section-tag">🔓 Chapter 8 · 상처와 카르마, 반복되는 아픔 — 미리보기</div>
+      <div class="r-section-tag">🔓 Chapter 10 · 대운은 언제 오는가 — 미리보기</div>
       <div class="r-section-body" id="preview-body2">분석 중이에요...</div>
     </div>
 
@@ -1358,6 +1421,18 @@ body::before {
         <div class="blur-inner">
           <div class="r-section-body" id="blur-body">당신은 태어날 때부터 감수성이 예민하게 설계된 사람이에요. 주변 분위기를 빠르게 읽고, 타인의 감정을 흡수하는 능력이 있어요. 이게 강점이기도 하지만, 동시에 에너지를 쉽게 소진시키는 구조이기도 해요.<br><br>특히 어릴 때 환경에서 형성된 패턴이 지금도 반복되고 있을 가능성이 높아요. 왜 비슷한 상황에서 비슷한 감정을 느끼는지, 그 구조적인 이유가 리포트 안에 있어요.</div>
         </div>
+      </div>
+    </div>
+
+    <!-- ★ 카운트다운 배너 1 ★ -->
+    <div class="price-countdown">
+      <div class="pc-left">
+        <strong>🚨 지금 구매하면 9,900원이에요</strong>
+        <div class="pc-arrow">남은 시간 내 결제 시 <span>9,900원</span> 적용</div>
+      </div>
+      <div class="pc-right">
+        <div class="pc-timer-label">남은 시간</div>
+        <div class="pc-timer" id="pcTimer">02:59:00</div>
       </div>
     </div>
 
@@ -1479,6 +1554,18 @@ body::before {
       <div class="fb-notice">💌 10분 내 이메일 발송 · 40페이지 이상 분량<br>태어난 순간의 차트로 구조적으로 분석해드려요</div>
     </div>
 
+    <!-- ★ 카운트다운 배너 2 — 맨 밑 ★ -->
+    <div class="price-countdown">
+      <div class="pc-left">
+        <strong>🚨 지금 구매하면 9,900원이에요</strong>
+        <div class="pc-arrow">남은 시간 내 결제 시 <span>9,900원</span> 적용</div>
+      </div>
+      <div class="pc-right">
+        <div class="pc-timer-label">남은 시간</div>
+        <div class="pc-timer" id="pcTimer2">02:59:00</div>
+      </div>
+    </div>
+
   </div><!-- /result-body -->
 
   <!-- 고정 하단 버튼 -->
@@ -1597,29 +1684,26 @@ function chkDate(src) {
   const yEl = document.getElementById('inp-year');
   const mEl = document.getElementById('inp-month');
   const dEl = document.getElementById('inp-day');
-  const y = yEl.value;
-  const m = mEl.value;
-  const d = dEl.value;
+  const y = yEl.value, m = mEl.value, d = dEl.value;
 
-  // 범위 초과만 강제 조정 (최솟값 강제 없음)
+  // 월 범위 강제
   if (m !== '' && +m > 12) mEl.value = '12';
+  if (m !== '' && +m < 1 && m.length > 0) mEl.value = '1';
+  // 일 범위 강제
   if (d !== '' && +d > 31) dEl.value = '31';
+  if (d !== '' && +d < 1 && d.length > 0) dEl.value = '1';
 
-  // 연도 4자리 → 월 자동 포커스
+  // 연도 4자리 입력 → 월 자동 포커스
   if (src === 'year' && y.length === 4) mEl.focus();
-
-  // 월 입력 완료 → 일 자동 포커스
-  // 2자리 입력됐거나, 2 이상 숫자 1자리면 넘김 (13이상은 이미 위에서 막힘)
-  if (src === 'month') {
-    if (m.length === 2) dEl.focus();
-    else if (m.length === 1 && +m >= 2) dEl.focus();
-  }
+  // 월 2자리 or 범위 내 2번째 자리 → 일 자동 포커스
+  if (src === 'month' && (m.length === 2 || (+m >= 2 && m.length === 1))) dEl.focus();
 
   const ok = y.length === 4 && +y >= 1920 && +y <= 2010
            && m !== '' && +m >= 1 && +m <= 12
            && d !== '' && +d >= 1 && +d <= 31;
   document.getElementById('n2').disabled = !ok;
 }
+
 
 /* ════════════════════════════════
    각 스텝 GO
@@ -1639,7 +1723,8 @@ function go2() {
 }
 
 function go3() {
-  D.time = document.getElementById('inp-time').value;
+  const val = document.getElementById('inp-time').value.trim();
+  D.time = val || '00:00';
   startAnalysis();
 }
 
@@ -1739,14 +1824,20 @@ function showResult(data) {
   document.getElementById('r-sign-symbol').textContent = sign.symbol;
   document.getElementById('r-sign-name').textContent = sign.name;
 
-
+  // 행성 정보 (Make에서 받거나 더미)
+  const planets = data.planets || getDummyPlanets(sign.name);
+  document.getElementById('mc-sun').textContent     = planets.sun     || sign.name;
+  document.getElementById('mc-moon').textContent    = planets.moon    || '처녀';
+  document.getElementById('mc-mercury').textContent = planets.mercury || '물고기';
+  document.getElementById('mc-venus').textContent   = planets.venus   || '양';
+  document.getElementById('mc-mars').textContent    = planets.mars    || '쌍둥이';
 
   // 미리보기 텍스트 — 앞 100자만 보이고 나머지 블러
   const preview = data.preview || getDefaultPreview(D.name, sign.name);
   const previewEl = document.getElementById('preview-body');
   if (previewEl) {
-    const visible = preview.substring(0, 190);
-    const blurred = preview.substring(190);
+    const visible = preview.substring(0, 200);
+    const blurred = preview.substring(200);
     previewEl.innerHTML = visible.replace(/\n/g, '<br>') +
       (blurred ? `<span style="filter:blur(5px);user-select:none;pointer-events:none;">${blurred.replace(/\n/g,'<br>')}</span>` : '');
   }
@@ -1755,8 +1846,8 @@ function showResult(data) {
   const preview2 = data.preview2 || '';
   const preview2El = document.getElementById('preview-body2');
   if (preview2El && preview2) {
-    const visible2 = preview2.substring(0, 190);
-    const blurred2 = preview2.substring(190);
+    const visible2 = preview2.substring(0, 200);
+    const blurred2 = preview2.substring(200);
     preview2El.innerHTML = visible2.replace(/\n/g, '<br>') +
       (blurred2 ? `<span style="filter:blur(5px);user-select:none;pointer-events:none;">${blurred2.replace(/\n/g,'<br>')}</span>` : '');
   }
@@ -1777,6 +1868,36 @@ function showResult(data) {
       cta.classList.toggle('on', el.scrollTop > 300);
     }, { passive: true });
   }, 300);
+
+  startCountdown();
+}
+
+/* ════════════════════════════════
+   가격 카운트다운
+════════════════════════════════ */
+function startCountdown() {
+  const key = 'todaystar_cd_end';
+  let endTime = parseInt(sessionStorage.getItem(key) || '0');
+  if (!endTime || endTime < Date.now()) {
+    const mins = 179 + Math.floor(Math.random() * 60);
+    endTime = Date.now() + mins * 60 * 1000;
+    sessionStorage.setItem(key, endTime);
+  }
+  function tick() {
+    const el  = document.getElementById('pcTimer');
+    const el2 = document.getElementById('pcTimer2');
+    if (!el) return;
+    const diff = Math.max(0, endTime - Date.now());
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const t = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    el.textContent = t;
+    if (el2) el2.textContent = t;
+    if (diff > 0) setTimeout(tick, 1000);
+    else { el.textContent = '마감!'; if (el2) el2.textContent = '마감!'; }
+  }
+  tick();
 }
 
 
@@ -1805,7 +1926,17 @@ function getZodiacSign(month, day) {
   return signs[0];
 }
 
-
+function getDummyPlanets(sunSign) {
+  const all = ['양','황소','쌍둥이','게','사자','처녀','천칭','전갈','궁수','염소','물병','물고기'];
+  const idx = all.findIndex(s => sunSign.includes(s));
+  return {
+    sun:     all[idx] || '물고기',
+    moon:    all[(idx+4)%12],
+    mercury: all[(idx+1)%12],
+    venus:   all[(idx+2)%12],
+    mars:    all[(idx+6)%12],
+  };
+}
 
 function getDefaultPreview(name, sign) {
   return `${name}님, 지금 이 시기는 변화의 경계에 서 있는 때예요.\n\n${sign} 특유의 감수성과 직관이 어느 때보다 강하게 작동하고 있어요. 주변에서 일어나는 변화들이 사실 당신을 위한 신호일 수 있어요.\n\n지금 느끼는 불안이나 답답함은 새로운 흐름이 시작되기 직전의 신호예요. 이 시기를 어떻게 보내느냐가 앞으로 6개월을 결정해요.`;
