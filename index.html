@@ -744,7 +744,7 @@ body::before {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 100px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(4,4,12,0.3) 60%, rgba(4,4,12,0.6) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(4,4,12,0.15) 40%, rgba(4,4,12,0.3) 100%);
 }
 .blur-inner {
   filter: blur(4px);
@@ -1745,8 +1745,8 @@ function showResult(data) {
   const preview = data.preview || getDefaultPreview(D.name, sign.name);
   const previewEl = document.getElementById('preview-body');
   if (previewEl) {
-    const visible = preview.substring(0, 150);
-    const blurred = preview.substring(150);
+    const visible = preview.substring(0, 170);
+    const blurred = preview.substring(170);
     previewEl.innerHTML = visible.replace(/\n/g, '<br>') +
       (blurred ? `<span style="filter:blur(5px);user-select:none;pointer-events:none;">${blurred.replace(/\n/g,'<br>')}</span>` : '');
   }
@@ -1755,8 +1755,8 @@ function showResult(data) {
   const preview2 = data.preview2 || '';
   const preview2El = document.getElementById('preview-body2');
   if (preview2El && preview2) {
-    const visible2 = preview2.substring(0, 150);
-    const blurred2 = preview2.substring(150);
+    const visible2 = preview2.substring(0, 170);
+    const blurred2 = preview2.substring(170);
     preview2El.innerHTML = visible2.replace(/\n/g, '<br>') +
       (blurred2 ? `<span style="filter:blur(5px);user-select:none;pointer-events:none;">${blurred2.replace(/\n/g,'<br>')}</span>` : '');
   }
