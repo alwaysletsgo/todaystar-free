@@ -726,7 +726,7 @@ body::before {
   margin-bottom: 14px;
 }
 .r-section-body {
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 2;
   color: rgba(240,235,224,0.6);
   white-space: pre-wrap;
@@ -1745,8 +1745,8 @@ function showResult(data) {
   const preview = data.preview || getDefaultPreview(D.name, sign.name);
   const previewEl = document.getElementById('preview-body');
   if (previewEl) {
-    const visible = preview.substring(0, 200);
-    const blurred = preview.substring(200);
+    const visible = preview.substring(0, 150);
+    const blurred = preview.substring(150);
     previewEl.innerHTML = visible.replace(/\n/g, '<br>') +
       (blurred ? `<span style="filter:blur(5px);user-select:none;pointer-events:none;">${blurred.replace(/\n/g,'<br>')}</span>` : '');
   }
@@ -1755,8 +1755,8 @@ function showResult(data) {
   const preview2 = data.preview2 || '';
   const preview2El = document.getElementById('preview-body2');
   if (preview2El && preview2) {
-    const visible2 = preview2.substring(0, 200);
-    const blurred2 = preview2.substring(200);
+    const visible2 = preview2.substring(0, 150);
+    const blurred2 = preview2.substring(150);
     preview2El.innerHTML = visible2.replace(/\n/g, '<br>') +
       (blurred2 ? `<span style="filter:blur(5px);user-select:none;pointer-events:none;">${blurred2.replace(/\n/g,'<br>')}</span>` : '');
   }
