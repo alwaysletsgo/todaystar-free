@@ -1819,13 +1819,6 @@ function showResult(data) {
   document.getElementById('r-sign-symbol').textContent = sign.symbol;
   document.getElementById('r-sign-name').textContent = sign.name;
 
-  // 행성 정보 (Make에서 받거나 더미)
-  const planets = data.planets || getDummyPlanets(sign.name);
-  document.getElementById('mc-sun').textContent     = planets.sun     || sign.name;
-  document.getElementById('mc-moon').textContent    = planets.moon    || '처녀';
-  document.getElementById('mc-mercury').textContent = planets.mercury || '물고기';
-  document.getElementById('mc-venus').textContent   = planets.venus   || '양';
-  document.getElementById('mc-mars').textContent    = planets.mars    || '쌍둥이';
 
   // 미리보기 텍스트 — 앞 100자만 보이고 나머지 블러
   const preview = data.preview || getDefaultPreview(D.name, sign.name);
