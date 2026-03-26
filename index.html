@@ -1683,15 +1683,13 @@ function chkDate(src) {
 
   // 월 범위 강제
   if (m !== '' && +m > 12) mEl.value = '12';
-  if (m !== '' && +m < 1 && m.length > 0) mEl.value = '1';
   // 일 범위 강제
   if (d !== '' && +d > 31) dEl.value = '31';
-  if (d !== '' && +d < 1 && d.length > 0) dEl.value = '1';
 
   // 연도 4자리 입력 → 월 자동 포커스
   if (src === 'year' && y.length === 4) mEl.focus();
   // 월 2자리 or 범위 내 2번째 자리 → 일 자동 포커스
-  if (src === 'month' && (m.length === 2 || (+m >= 2 && m.length === 1))) dEl.focus();
+if (src === 'month' && m.length === 2) dEl.focus();
 
   const ok = y.length === 4 && +y >= 1920 && +y <= 2010
            && m !== '' && +m >= 1 && +m <= 12
